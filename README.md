@@ -2,9 +2,9 @@
 
 ## Objectives
 
-1. Write action creators and reducers to modify application state
-2. Build **Redux's combineReducers()** function
-3. Use the `combineReducers()` function to delegate different pieces of state to each reducer
+1.  Write action creators and reducers to modify application state
+2.  Build **Redux's combineReducers()** function
+3.  Use the `combineReducers()` function to delegate different pieces of state to each reducer
 
 ## Introduction
 
@@ -23,15 +23,15 @@ of programming books that we've read.
 
 We want our app to do two things:
 
-1. Keep track of all the books we've read: title, author, description.
-2. Keep track of the authors who wrote these books.
+1.  Keep track of all the books we've read: title, author, description.
+2.  Keep track of the authors who wrote these books.
 
 #### Determine Application State Structure
 
 Our app will need a state object that stores two types of information:
 
-1. All our books, in an array
-2. Our authors, also in an array
+1.  All our books, in an array
+2.  Our authors, also in an array
 
 Each of these types of information--all our books, and the authors--should be
 represented on our store's state object. We want to think of our store's state
@@ -42,12 +42,10 @@ authorId as a foreign key.
 
 With that, we can set the application state as:
 
-```
-{
-  authors: //array of authors
-  books: // array of books,
-}
-```
+    {
+      authors: //array of authors
+      books: // array of books,
+    }
 
 So our state object will have two top-level keys, each pointing to an array. For
 now, let's write a single reducer to manage both of these resources.
@@ -107,12 +105,12 @@ application, we can keep our code organized as our applications get more
 complicated.
 
 > **NOTE:** You may have noticed something in the reducer example: when we
-update one part of `state`, we're still using the spread operator _on other
-parts_. For example, in the `"ADD_AUTHOR"` case, we add `action.author` to the
-`authors` array, but **we also use the spread operator to create a new `book`
-array**. This is because both `Object.assign()` and the spread operator only
-create shallow copies of objects. If we leave out `books: [...state.books]`,
-and just write the following:
+> update one part of `state`, we're still using the spread operator _on other
+> parts_. For example, in the `"ADD_AUTHOR"` case, we add `action.author` to the
+> `authors` array, but **we also use the spread operator to create a new `book`
+> array**. This is because both `Object.assign()` and the spread operator only
+> create shallow copies of objects. If we leave out `books: [...state.books]`,
+> and just write the following:
 
 ```js
 return {
@@ -129,7 +127,9 @@ this exact issue][], and [provides further examples][] of how to properly use th
 spread operator to deeply copy nested data.
 
 [The official redux documentation]: https://redux.js.org/faq/immutable-data#what-are-the-benefits-of-immutability
+
 [discusses this exact issue]: https://redux.js.org/faq/immutable-data#accidental-object-mutation
+
 [provides further examples]: https://redux.js.org/recipes/structuring-reducers/immutable-update-patterns
 
 ## Refactor by using combineReducers
@@ -337,7 +337,7 @@ the name dispatches from the BookInput component. If the name already exists,
 state is returned unchanged. If the name is not present, it is added to the
 author array. Use the example above to modify the `manageAuthorsAndBooks`
 reducer and you can see the effect. We have two separate forms, one for adding
-just authors, and one that adds books _and_ authors.
+just authors, and one that adds books \_and_ authors.
 
 **Note:** We're using a useful package, `uuid`, to handle unique ID generation.
 With this refactor, since we are creating an author ID from within the reducer
@@ -369,9 +369,3 @@ In React/Redux apps where we're using and storing many resources in our store,
 keeping reducers separated helps us organize code and separate concerns. Actions
 can cause multiple reducers to modify their own state, but we can still keep all
 modifications to a _particular_ resource within its own separate file.
-
-#### Resources
-
-- [Implementing Combine Reducers from Scratch](https://egghead.io/lessons/javascript-redux-implementing-combinereducers-from-scratch)
-
-<p class='util--hide'>View <a href='https://learn.co/lessons/combine-reducers-codealong'>Combine Reducers Codealong</a> on Learn.co and start learning to code for free.</p>
